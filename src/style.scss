@@ -1,0 +1,108 @@
+
+@import "/node_modules/@picocss/pico/scss/pico.scss";
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
+* {
+	box-sizing: border-box;
+	font-family: 'Goldman', cursive;
+}
+body > main {
+	height: 100vh;
+	overflow: hidden;
+	padding: 0;
+}
+button {
+	margin: 0;
+}
+.page {
+	display: grid;
+	height: 100vh;
+	overflow: hidden;
+	padding: 1rem 0;
+	grid-template-areas:
+		"t t t"
+		"p p p"
+		"f f f";
+	grid-template-columns: auto;
+	grid-template-rows: auto 50% 1fr;
+	gap: 1rem 2rem;
+	#title {
+		grid-area: t;
+		margin: 0;
+		text-align: center;
+		font-family: 'Goldman', cursive;
+		font-weight: 400;
+	}
+	#form {
+		grid-area: f;
+		overflow: auto;
+		padding: 0 var(--spacing);
+	}
+	#preview {
+		grid-area: p;
+	}
+	@media screen and (min-width: 960px) {
+		grid-template-areas:
+			"t t t"
+			"f p p";
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+		gap: 0 2rem;
+		#form {
+			padding: 0;
+		}
+	}
+	.presets-area {
+		display: grid;
+		grid-template-columns: 3fr 1fr 1fr;
+		gap: var(--spacing);
+		button {
+			margin-top: calc(var(--spacing) * 0.25);
+		}
+	}
+	.save-area {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+		gap: var(--spacing);
+	}
+	.colors {
+		display: grid;
+		grid-template-columns: repeat(15, 2rem);
+		.color {
+			height: 2rem;
+		}
+	}
+}
+.logo-wrapper {
+	display: flex;
+	justify-content: center;
+	svg {
+		max-height: 100%;
+	}
+}
+.print-area svg {
+	margin: 2rem;
+}
+input:not([type=checkbox]):not([type=radio]), select, textarea, .colors {
+	margin-bottom: .3rem;
+}
+/* width */
+::-webkit-scrollbar {
+	width: .3rem;
+	height: .3rem;
+}
+/* Track */
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+	border-radius: 1rem;
+}
+::-webkit-scrollbar-track {
+	background: #cccccc;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}

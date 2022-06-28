@@ -1,0 +1,30 @@
+{
+  "name": "qamf-anubis-avatar-creator",
+  "description": "QAMF Anubis Avatar Creator",
+  "license": "MIT",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {},
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "update": "npm-check -y"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/wicg-file-system-access": "^2020.9.5",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/compiler-sfc": "^3.2.11",
+    "npm-check": "^5.9.2",
+    "sass": "^1.53.0",
+    "vite": "^2.4.4"
+  },
+  "dependencies": {
+    "@picocss/pico": "^1.5.3",
+    "color-scheme": "^1.0.1",
+    "dom-to-image": "^2.6.0",
+    "vue": "^3.2.11"
+  },
+  "packageManager": "yarn@3.2.1"
+}
