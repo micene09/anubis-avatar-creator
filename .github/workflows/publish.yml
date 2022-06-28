@@ -10,18 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: ci-${{ github.ref }}
     steps:
+      
       - name: checkout 🛎️
         uses: actions/checkout@v2
+    
       - name: use node v16.x 🔧
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
+     
       - name: build 🔧
           run: |
             yarn install --immutable
             yarn build
+
       - name: publish 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
