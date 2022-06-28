@@ -22,9 +22,9 @@ jobs:
           cache: 'npm'
      
       - name: build 🔧
-          run: |
-            yarn install --immutable
-            yarn build
+        run: |
+          yarn install --immutable
+          yarn build
 
       - name: publish 🚀
         uses: JamesIves/github-pages-deploy-action@v4
