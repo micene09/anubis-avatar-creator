@@ -74,20 +74,24 @@ label > button {
 	}
 }
 .title-bar {
-	position: relative;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+
+	@media screen and (min-width: 900px) {
+		display: block;
+		position: relative;
+		.tools {
+			position: absolute;
+			top: calc(var(--font-size) / 2);
+			right: 0;
+		}
+	}
 	.tools {
-		position: absolute;
-		top: calc(var(--font-size) / 2);
-		right: 0;
 		display: grid;
 		grid-template-columns: auto auto;
-		gap: var(--spacing);
+		gap: calc(var(--spacing) / 1.5);
 		align-items: center;
-
-		--theme-switch-width: 2.5rem;
-		--theme-switch-height: 1.2rem;
-		--theme-switch-tanslateL: .1rem;
-		--theme-switch-tanslateR: 1.15rem;
+		justify-content: end;
 	}
 }
 .presets-area {
