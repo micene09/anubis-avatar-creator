@@ -40,6 +40,8 @@
 :root {
 	--theme-switch-width: 40px;
 	--theme-switch-height: 22px;
+	--theme-switch-tanslateL: 3px;
+	--theme-switch-tanslateR: 16px;
 }
 .theme-switch {
 	user-select: none;
@@ -48,8 +50,8 @@
 	cursor: pointer;
 	border-radius: 11px;
 	display: block;
-	width: 40px;
-	height: 22px;
+	width: var(--theme-switch-width);
+	height: var(--theme-switch-height);
 	flex-shrink: 0;
 	border: var(--border-width) solid var(--form-element-border-color);
 	background-color: var(--form-element-background-color);
@@ -57,10 +59,10 @@
 
 	> .check {
 		position: absolute;
-		top: 1px;
-		left: 1px;
-		width: calc(var(--theme-switch-width) - var(--border-width) - var(--border-width));
-		height: calc(var(--theme-switch-height) - var(--border-width) - var(--border-width));
+		top: 0;
+		left: 0;
+		width: calc(var(--theme-switch-width) - (var(--border-width) * 2));
+		height: calc(var(--theme-switch-height) - (var(--border-width) * 2));
 		border-radius: 50%;
 		background: transparent;
 		transition: background-color .25s, transform .25s;
@@ -68,23 +70,26 @@
 		> .icon {
 			position: relative;
 			display: block;
-			width: calc(var(--theme-switch-width) - var(--border-width) - var(--border-width));
-			height: calc(var(--theme-switch-height) - var(--border-width) - var(--border-width));
+			width: calc(var(--theme-switch-width) - (var(--border-width) * 2));
+			height: calc(var(--theme-switch-height) - (var(--border-width) * 2));
 			border-radius: 50%;
 			overflow: hidden;
 
 			> .sun, > .moon {
 				position: absolute;
-				top: 3px;
-				left: 3px;
-				width: 12px;
-				height: 12px;
+				top: 0;
+				left: 0;
+				width: calc((var(--theme-switch-width) - (var(--border-width) * 2)) / 2);
+				height: calc(var(--theme-switch-height) - (var(--border-width) * 2));
 				fill: var(--color);
 			}
 		}
 	}
+	> .check {
+		transform: translate(var(--theme-switch-tanslateL));
+	}
 	&.dark > .check {
-		transform: translate(18px);
+		transform: translate(var(--theme-switch-tanslateR));
 	}
 	&.dark > .check > .icon > .sun { opacity: 0 }
 	&.light > .check > .icon > .moon { opacity: 0 }
