@@ -6,6 +6,7 @@ import ColorPicker from "./components/color-picker.vue";
 import FormatPicker from "./components/format-picker.vue";
 import ResolutionPicker from "./components/resolution-picker.vue";
 import Presets from "./components/presets.vue";
+import ThemeSwitch from "./components/theme-switch.vue";
 
 export type Preset = {
 	bgcolor: string
@@ -20,7 +21,8 @@ export default defineComponent({
 		ColorPicker,
 		FormatPicker,
 		ResolutionPicker,
-		Presets
+		Presets,
+		ThemeSwitch
 	},
 	setup() {
 		const printArea = ref(null);
@@ -62,7 +64,7 @@ export default defineComponent({
 			const file = await handle.getFile();
 			const reader = new FileReader();
 			reader.readAsText(file);
-			reader.onload = function(){ 
+			reader.onload = function(){
 				const content = reader.result as string;
 				try {
 					const preset: Preset = JSON.parse(content);

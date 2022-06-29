@@ -1,7 +1,9 @@
 <template>
 <div class="container">
 	<div class="page">
-		<h3 id="title" class="title">Anubis Avatar Creator</h3>
+		<div id="title" class="title-bar">
+			<h3 class="title">Anubis Avatar Creator</h3>
+		</div>
 		<div class="form" id="form">
 			<ColorPicker label="Background" v-model="bgcolor" />
 			<ColorPicker label="Body" v-model="body" />
