@@ -48,7 +48,7 @@
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
-	border-radius: 11px;
+	border-radius: 1rem;
 	display: block;
 	width: var(--theme-switch-width);
 	height: var(--theme-switch-height);
