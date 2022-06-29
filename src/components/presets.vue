@@ -111,10 +111,4 @@ function onChange(payload) {
 	const opt = options[+index];
 	emit('update:modelValue', opt.data)
 }
-function importPreset() {
-	emit("click-import")
-}
-function exportPreset() {
-	emit("click-export")
-}
 </script>
