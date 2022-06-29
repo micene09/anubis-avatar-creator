@@ -19,11 +19,11 @@
 				<div class="grid">
 					<label>
 						&nbsp;
-						<button class="secondary" @click="onClickImport">I</button>
+						<button class="outline" @click="onClickImport">I</button>
 					</label>
 					<label>
 						&nbsp;
-						<button class="secondary" @click="onClickExport">E</button>
+						<button class="outline" @click="onClickExport">E</button>
 					</label>
 				</div>
 			</div>
@@ -31,7 +31,7 @@
 				<ResolutionPicker v-model:w="width" v-model:h="height" :disabled="format === 'SVG'" />
 				<label>
 					&nbsp;
-					<button class="secondary" @click="onClickRandomColors">Random Colors</button>
+					<button class="outline" @click="onClickRandomColors">Random Colors</button>
 				</label>
 			</div>
 			<!-- <div class="colors">
@@ -43,7 +43,7 @@
 					&nbsp;
 					<button @click="download">Export as</button>
 				</label>
-				<FormatPicker v-model="format" />
+				<FormatPicker label="&nbsp;" v-model="format" />
 			</div>
 		</div>
 		<div class="logo-wrapper" id="preview" :style="{ background: bgcolor }">
