@@ -79,6 +79,15 @@ label > button {
 		position: absolute;
 		top: calc(var(--font-size) / 2);
 		right: 0;
+		display: grid;
+		grid-template-columns: auto auto;
+		gap: var(--spacing);
+		align-items: center;
+
+		--theme-switch-width: 2.5rem;
+		--theme-switch-height: 1.2rem;
+		--theme-switch-tanslateL: .1rem;
+		--theme-switch-tanslateR: 1.15rem;
 	}
 }
 .presets-area {

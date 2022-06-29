@@ -5,6 +5,7 @@
 			<h3 class="title">Anubis Avatar Creator</h3>
 			<span class="tools">
 				<ThemeSwitch />
+				<GitHubRepo :href="repoUrl" class="contrast" />
 			</span>
 		</div>
 		<div class="form" id="form">

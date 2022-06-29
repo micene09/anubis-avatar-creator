@@ -7,6 +7,7 @@ import FormatPicker from "./components/format-picker.vue";
 import ResolutionPicker from "./components/resolution-picker.vue";
 import Presets from "./components/presets.vue";
 import ThemeSwitch from "./components/theme-switch.vue";
+import GitHubRepo from "./components/github-repo.vue";
 
 export type Preset = {
 	bgcolor: string
@@ -22,7 +23,8 @@ export default defineComponent({
 		FormatPicker,
 		ResolutionPicker,
 		Presets,
-		ThemeSwitch
+		ThemeSwitch,
+		GitHubRepo
 	},
 	setup() {
 		const printArea = ref(null);
@@ -34,6 +36,7 @@ export default defineComponent({
 		const format = ref<"PNG" | "SVG">("PNG");
 		const width = ref(532);
 		const height = ref(700);
+		const repoUrl = ref("https://github.com/Micene09/anubis-avatar-creator");
 		async function download() {
 			const style = { position: "static" };
 			const dataUrl = format.value === "PNG"
@@ -104,6 +107,7 @@ export default defineComponent({
 		onClickRandomColors();
 		return {
 			onClickRandomColors,
+			repoUrl,
 			printArea,
 			bgcolor,
 			body,
