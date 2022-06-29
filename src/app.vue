@@ -19,11 +19,11 @@
 				<div class="grid">
 					<label>
 						&nbsp;
-						<button class="outline" @click="onClickImport">I</button>
+						<button class="outline" @click="onClickImport"><small>Import</small></button>
 					</label>
 					<label>
 						&nbsp;
-						<button class="outline" @click="onClickExport">E</button>
+						<button class="outline" @click="onClickExport"><small>Export</small></button>
 					</label>
 				</div>
 			</div>
