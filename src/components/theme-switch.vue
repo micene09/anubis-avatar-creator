@@ -38,10 +38,10 @@
 
 <style lang="scss">
 :root {
-	--theme-switch-width: 40px;
-	--theme-switch-height: 22px;
-	--theme-switch-tanslateL: 3px;
-	--theme-switch-tanslateR: 16px;
+	--theme-switch-width: 2.5rem;
+	--theme-switch-height: 1.2rem;
+	--theme-switch-tanslateL: .1rem;
+	--theme-switch-tanslateR: 1.15rem;
 }
 .theme-switch {
 	user-select: none;
