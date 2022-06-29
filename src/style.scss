@@ -82,6 +82,14 @@ button {
 		max-height: 100%;
 	}
 }
+.title-bar {
+	position: relative;
+	.tools {
+		position: absolute;
+		top: calc(var(--font-size) / 2);
+		right: 0;
+	}
+}
 .print-area svg {
 	margin: 2rem;
 }

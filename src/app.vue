@@ -3,6 +3,9 @@
 	<div class="page">
 		<div id="title" class="title-bar">
 			<h3 class="title">Anubis Avatar Creator</h3>
+			<span class="tools">
+				<ThemeSwitch />
+			</span>
 		</div>
 		<div class="form" id="form">
 			<ColorPicker label="Background" v-model="bgcolor" />
