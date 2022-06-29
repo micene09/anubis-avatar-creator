@@ -19,9 +19,12 @@
 			display: grid;
 			grid-template-columns: 1fr 1rem 1fr;
 			gap: .5rem;
-			.divider {
+			> .divider {
 				text-align: center;
 				padding: var(--form-element-spacing-vertical) 0;
+			}
+			> input {
+				text-align: center;
 			}
 		}
 	}

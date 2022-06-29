@@ -13,28 +13,36 @@
 			<ColorPicker label="Body lights" v-model="bodyLights" />
 			<ColorPicker label="Primary" v-model="primary" />
 			<ColorPicker label="Secondary" v-model="secondary" />
-			<div class="presets-area">
+			<div class="grid">
 				<Presets @update:modelValue="onPresetChanged" />
-				<label>
-					&nbsp;
-					<button @click="onClickImport">Import</button>
-				</label>
-				<label>
-					&nbsp;
-					<button @click="onClickRandomColors">Random</button>
-				</label>
+				<div class="grid">
+					<label>
+						&nbsp;
+						<button class="secondary" @click="onClickImport">I</button>
+					</label>
+					<label>
+						&nbsp;
+						<button class="secondary" @click="onClickExport">E</button>
+					</label>
+				</div>
 			</div>
 			<div class="grid">
-				<FormatPicker v-model="format" />
 				<ResolutionPicker v-model:w="width" v-model:h="height" :disabled="format === 'SVG'" />
+				<label>
+					&nbsp;
+					<button class="secondary" @click="onClickRandomColors">Random Colors</button>
+				</label>
 			</div>
 			<!-- <div class="colors">
 				<div v-for="color in colors"
 					class="color" :style="{ background: '#' + color }"></div>
 			</div> -->
 			<div class="save-area">
-				<button @click="onClickExport">Export</button>
-				<button @click="download">Download</button>
+				<label>
+					&nbsp;
+					<button @click="download">Export as</button>
+				</label>
+				<FormatPicker v-model="format" />
 			</div>
 		</div>
 		<div class="logo-wrapper" id="preview" :style="{ background: bgcolor }">
