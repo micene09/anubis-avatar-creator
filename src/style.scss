@@ -69,8 +69,28 @@ label > button {
 .logo-wrapper {
 	display: flex;
 	justify-content: center;
+	position: relative;
 	svg {
 		max-height: 100%;
+	}
+	.logo.chat {
+		$width-small: 4rem;
+		$width-extra-small: 3rem;
+		position: absolute;
+		top: .5rem;
+		right: 0;
+		width: $width-small;
+		height: $width-small;
+		background-color: black;
+		border-radius: 100%;
+
+		&.small {
+			right: $width-extra-small + .2rem;
+		}
+		&.extra-small {
+			width: $width-extra-small;
+			height: $width-extra-small;
+		}
 	}
 }
 .title-bar {

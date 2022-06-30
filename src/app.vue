@@ -53,6 +53,18 @@
 				:primary="primary"
 				:secondary="secondary"
 			/>
+			<Logo class="logo chat small"
+				:body="body"
+				:body-lights="bodyLights"
+				:primary="primary"
+				:secondary="secondary"
+			/>
+			<Logo class="logo chat extra-small"
+				:body="body"
+				:body-lights="bodyLights"
+				:primary="primary"
+				:secondary="secondary"
+			/>
 		</div>
 	</div>
 </div>
