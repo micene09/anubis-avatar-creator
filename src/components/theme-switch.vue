@@ -56,7 +56,14 @@
 	border: var(--border-width) solid var(--form-element-border-color);
 	background-color: var(--form-element-background-color);
 	appearance: none;
+	transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
 
+	&:hover {
+		border-color: var(--form-element-active-border-color);
+		&:focus {
+			box-shadow: 0 0 0 var(--outline-width) var(--form-element-focus-color);
+		}
+	}
 	> .check {
 		position: absolute;
 		top: 0;
@@ -82,6 +89,12 @@
 				width: calc((var(--theme-switch-width) - (var(--border-width) * 2)) / 2);
 				height: calc(var(--theme-switch-height) - (var(--border-width) * 2));
 				fill: var(--color);
+				&:hover {
+					fill: var(--form-element-active-border-color);
+					&:focus {
+						box-shadow: 0 0 0 var(--outline-width) var(--form-element-focus-color);
+					}
+				}
 			}
 		}
 	}

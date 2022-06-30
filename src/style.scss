@@ -81,8 +81,11 @@ label > button {
 		right: 0;
 		width: $width-small;
 		height: $width-small;
-		background-color: black;
+		padding: 5px;
+		background-color: var(--background-color);
+		border: 1px solid var(--form-element-border-color);
 		border-radius: 100%;
+		transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
 
 		&.small {
 			right: $width-extra-small + .2rem;
@@ -90,6 +93,10 @@ label > button {
 		&.extra-small {
 			width: $width-extra-small;
 			height: $width-extra-small;
+		}
+		&:hover {
+			border-color: var(--form-element-active-border-color);
+			box-shadow: 0 0 0 var(--outline-width) var(--form-element-focus-color);
 		}
 	}
 }
