@@ -11,10 +11,11 @@ body > main {
 	padding: 0;
 }
 button,
-label {
+label,
+input:not([type=checkbox]):not([type=radio]), select, textarea, .colors  {
 	margin: 0;
 }
-label > button {
+label.just-button > button {
 	margin-top: calc(var(--spacing) * 0.25);
 }
 .page {
@@ -87,10 +88,10 @@ label > button {
 		border-radius: 100%;
 		transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
 
-		&.small {
-			right: $width-extra-small + .2rem;
-		}
+
 		&.extra-small {
+			top: $width-small + .5rem + .2rem;
+			right: 0.5rem;
 			width: $width-extra-small;
 			height: $width-extra-small;
 		}
@@ -133,9 +134,6 @@ label > button {
 }
 .print-area svg {
 	margin: 3rem;
-}
-input:not([type=checkbox]):not([type=radio]), select, textarea, .colors {
-	margin-bottom: .3rem;
 }
 /* width */
 ::-webkit-scrollbar {

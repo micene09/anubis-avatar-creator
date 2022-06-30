@@ -29,7 +29,7 @@
 			</div>
 			<div class="grid">
 				<ResolutionPicker v-model:w="width" v-model:h="height" :disabled="format === 'SVG'" />
-				<label>
+				<label class="just-button">
 					&nbsp;
 					<button class="outline" @click="onClickRandomColors">Random Colors</button>
 				</label>
