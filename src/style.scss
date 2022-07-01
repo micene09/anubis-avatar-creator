@@ -42,6 +42,8 @@ label.just-button > button {
 	}
 	#form {
 		grid-area: f;
+		display: grid;
+		gap: .5rem;
 		overflow: auto;
 		padding: 0 var(--spacing);
 	}
