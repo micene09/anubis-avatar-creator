@@ -58,12 +58,14 @@
 				:body-lights="bodyLights"
 				:primary="primary"
 				:secondary="secondary"
+				:style="{ background: bgcolor }"
 			/>
 			<Logo class="logo chat extra-small"
 				:body="body"
 				:body-lights="bodyLights"
 				:primary="primary"
 				:secondary="secondary"
+				:style="{ background: bgcolor }"
 			/>
 		</div>
 	</div>
