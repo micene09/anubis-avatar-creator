@@ -34,8 +34,8 @@ export default defineComponent({
 		const primary = ref("");
 		const secondary = ref("");
 		const format = ref<"PNG" | "SVG">("PNG");
-		const width = ref(532);
-		const height = ref(700);
+		const width = ref(760);
+		const height = ref(1000);
 		const repoUrl = ref("https://github.com/Micene09/anubis-avatar-creator");
 		async function download() {
 			const style = { position: "static" };
