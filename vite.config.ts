@@ -5,10 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
 	plugins: [vue()],
 	base: "/anubis-avatar-creator/",
-	server: {
-		https: true,
-		open: true
-	},
+	server: { open: true },
 	resolve: {
 		alias: [
 		{
