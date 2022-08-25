@@ -34,10 +34,6 @@
 					<button class="outline" @click="onClickRandomColors">Random Colors</button>
 				</label>
 			</div>
-			<!-- <div class="colors">
-				<div v-for="color in colors"
-					class="color" :style="{ background: '#' + color }"></div>
-			</div> -->
 			<div class="save-area">
 				<label>
 					&nbsp;
