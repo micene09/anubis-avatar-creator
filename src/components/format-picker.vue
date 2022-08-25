@@ -10,7 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { ref } from "vue"
+import { useVModel } from "@vueuse/core"
 const props = defineProps({
 	label: {
 		type: String,
@@ -23,13 +24,6 @@ const props = defineProps({
 	}
 })
 const emit = defineEmits(['update:modelValue'])
-const value = computed({
-	get() {
-		return props.modelValue
-	},
-	set(value) {
-		emit('update:modelValue', value)
-	}
-})
-const id = ref(Math.random() * 1000 + "");
+const value = useVModel(props, "modelValue", emit)
+const id = ref(Math.random() * 1000 + "")
 </script>

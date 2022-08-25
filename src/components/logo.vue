@@ -229,11 +229,11 @@ const styleTag = computed(() => {
   fill: ${props.secondary};
 }
 </style>`
-});
+})
 
 defineExpose({
   svg,
   styleTag
-});
+})
 
 </script>

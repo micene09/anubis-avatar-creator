@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
+import { useVModel } from "@vueuse/core";
 import { Preset } from "../app";
 
 type PresetOptions = {
@@ -89,7 +90,7 @@ const options: PresetOptions[] = [
 		}
 	}
 ];
-defineProps({
+const props = defineProps({
 	label: {
 		type: String,
 		default: "Presets"
@@ -99,16 +100,19 @@ defineProps({
 		default: () => null
 	}
 })
-onMounted(() => {
-	emit('update:modelValue', null)
-})
+
 const id = ref(Math.random() * 1000 + "");
 const emit = defineEmits(["update:modelValue", "click-import", "click-export"])
+const data = useVModel(props, "modelValue", emit)
+
+onMounted(() => {
+	data.value = null
+})
 function onChange(payload) {
 	const index = +payload.target.value;
 	if (index < 0)
-		return emit('update:modelValue', null)
+		return data.value = null
 	const opt = options[+index];
-	emit('update:modelValue', opt.data)
+	data.value = opt.data
 }
 </script>
