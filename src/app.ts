@@ -60,8 +60,6 @@ export default defineComponent({
 				...queryStringPreset
 			}
 			onPresetChanged(loadedPreset)
-			const urlParams = useUrlSearchParams("history", { removeNullishValues: true })
-			Object.keys(urlParams).forEach(param => urlParams[param] = null)
 			loading.value = false
 		})
 		function getPresetObject(): Preset {
