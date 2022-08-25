@@ -41,6 +41,10 @@
 			<div class="save-area">
 				<label>
 					&nbsp;
+					<button :data-tooltip="copiedTooltip" @click="share">Share</button>
+				</label>
+				<label>
+					&nbsp;
 					<button @click="download">Export as</button>
 				</label>
 				<FormatPicker label="&nbsp;" v-model="format" />

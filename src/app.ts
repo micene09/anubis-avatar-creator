@@ -8,6 +8,7 @@ import ResolutionPicker from "./components/resolution-picker.vue";
 import Presets from "./components/presets.vue";
 import ThemeSwitch from "./components/theme-switch.vue";
 import GitHubRepo from "./components/github-repo.vue";
+import { refAutoReset, useClipboard } from "@vueuse/core";
 
 export type Preset = {
 	bgcolor: string
@@ -27,6 +28,8 @@ export default defineComponent({
 		GitHubRepo
 	},
 	setup() {
+		const { copy } = useClipboard()
+		const copiedTooltip = refAutoReset<string | undefined>(undefined, 2500)
 		const printArea = ref(null);
 		const bgcolor = ref("transparent");
 		const body = ref("#3e4442");
@@ -37,6 +40,16 @@ export default defineComponent({
 		const width = ref(760);
 		const height = ref(1000);
 		const repoUrl = ref("https://github.com/Micene09/anubis-avatar-creator");
+
+		function getPresetObject(): Preset {
+			return {
+				bgcolor: bgcolor.value,
+				body: body.value,
+				bodyLights: bodyLights.value,
+				primary: primary.value,
+				secondary: secondary.value
+			}
+		}
 		async function download() {
 			const style = { position: "static" };
 			const dataUrl = format.value === "PNG"
@@ -46,6 +59,13 @@ export default defineComponent({
 			link.download = 'anubis-avatar.' + format.value.toLowerCase();
 			link.href = dataUrl;
 			link.click();
+		}
+		function share() {
+			const preset = getPresetObject()
+			const searchParams = new URLSearchParams(preset)
+			const url = new URL(location.href.split("?")[0] + searchParams.toString())
+			copy(url.toString())
+			copiedTooltip.value = "Link copied"
 		}
 		function onPresetChanged(preset: Preset | null) {
 			if (!preset) return;
@@ -80,13 +100,7 @@ export default defineComponent({
 			}
 		}
 		function onClickExport() {
-			const exportObj = {
-				bgcolor: bgcolor.value,
-				body: body.value,
-				bodyLights: bodyLights.value,
-				primary: primary.value,
-				secondary: secondary.value
-			}
+			const exportObj = getPresetObject()
 			const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, undefined, "  "));
 			const anchor = document.createElement('a');
 			anchor.setAttribute("href", dataStr);
@@ -117,6 +131,8 @@ export default defineComponent({
 			format,
 			width,
 			height,
+			share,
+			copiedTooltip,
 			download,
 			onPresetChanged,
 			onClickImport,
