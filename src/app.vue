@@ -46,27 +46,29 @@
 				<FormatPicker label="&nbsp;" v-model="format" />
 			</div>
 		</div>
-		<div class="logo-wrapper" id="preview" :style="{ background: bgcolor }">
-			<Logo class="logo"
-				:body="body"
-				:body-lights="bodyLights"
-				:primary="primary"
-				:secondary="secondary"
-			/>
-			<Logo class="logo chat small"
-				:body="body"
-				:body-lights="bodyLights"
-				:primary="primary"
-				:secondary="secondary"
-				:style="{ background: bgcolor }"
-			/>
-			<Logo class="logo chat extra-small"
-				:body="body"
-				:body-lights="bodyLights"
-				:primary="primary"
-				:secondary="secondary"
-				:style="{ background: bgcolor }"
-			/>
+		<div class="logo-wrapper" id="preview" :style="{ background: bgcolor }" :aria-busy="loadingDebounced">
+			<template v-if="!loadingDebounced">
+				<Logo class="logo"
+					:body="body"
+					:body-lights="bodyLights"
+					:primary="primary"
+					:secondary="secondary"
+				/>
+				<Logo class="logo chat small"
+					:body="body"
+					:body-lights="bodyLights"
+					:primary="primary"
+					:secondary="secondary"
+					:style="{ background: bgcolor }"
+				/>
+				<Logo class="logo chat extra-small"
+					:body="body"
+					:body-lights="bodyLights"
+					:primary="primary"
+					:secondary="secondary"
+					:style="{ background: bgcolor }"
+				/>
+			</template>
 		</div>
 	</div>
 </div>

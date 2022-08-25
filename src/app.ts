@@ -1,4 +1,4 @@
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, onMounted } from "vue";
 import domtoimage from 'dom-to-image';
 import colorScheme from "color-scheme";
 import Logo from "./components/logo.vue"
@@ -8,7 +8,7 @@ import ResolutionPicker from "./components/resolution-picker.vue";
 import Presets from "./components/presets.vue";
 import ThemeSwitch from "./components/theme-switch.vue";
 import GitHubRepo from "./components/github-repo.vue";
-import { refAutoReset, useClipboard } from "@vueuse/core";
+import { refAutoReset, refDebounced, useClipboard, useUrlSearchParams } from "@vueuse/core";
 
 export type Preset = {
 	bgcolor: string
@@ -29,18 +29,41 @@ export default defineComponent({
 	},
 	setup() {
 		const { copy } = useClipboard()
+		const loading = ref(true)
+		const loadingDebounced = refDebounced(loading, 300)
 		const copiedTooltip = refAutoReset<string | undefined>(undefined, 2500)
-		const printArea = ref(null);
-		const bgcolor = ref("transparent");
-		const body = ref("#3e4442");
-		const bodyLights = ref("#6b7375");
-		const primary = ref("");
-		const secondary = ref("");
-		const format = ref<"PNG" | "SVG">("PNG");
+		const printArea = ref(null)
+		const bgcolor = ref("transparent")
+		const body = ref("#3e4442")
+		const bodyLights = ref("#6b7375")
+		const primary = ref("")
+		const secondary = ref("")
+		const format = ref<"PNG" | "SVG">("PNG")
 		const width = ref(760);
 		const height = ref(1000);
-		const repoUrl = ref("https://github.com/Micene09/anubis-avatar-creator");
+		const repoUrl = ref("https://github.com/Micene09/anubis-avatar-creator")
 
+		onMounted(() => {
+			const url = new URL(location.href)
+			if (!url.search) return loading.value = false
+			const params = url.searchParams
+			const defaultPreset = getPresetObject()
+			const queryStringPreset: Partial<Preset> = {
+				bgcolor: params.get("bgcolor"),
+				body: params.get("body"),
+				bodyLights: params.get("bodyLights"),
+				primary: params.get("primary"),
+				secondary: params.get("secondary")
+			}
+			const loadedPreset = {
+				...defaultPreset,
+				...queryStringPreset
+			}
+			onPresetChanged(loadedPreset)
+			const urlParams = useUrlSearchParams("history", { removeNullishValues: true })
+			Object.keys(urlParams).forEach(param => urlParams[param] = null)
+			loading.value = false
+		})
 		function getPresetObject(): Preset {
 			return {
 				bgcolor: bgcolor.value,
@@ -54,26 +77,26 @@ export default defineComponent({
 			const style = { position: "static" };
 			const dataUrl = format.value === "PNG"
 				? await domtoimage.toPng(printArea.value, { width: width.value, height: height.value, style })
-				: await domtoimage.toSvg(printArea.value, {} as any);
-			const link = document.createElement('a');
-			link.download = 'anubis-avatar.' + format.value.toLowerCase();
-			link.href = dataUrl;
-			link.click();
+				: await domtoimage.toSvg(printArea.value, {} as any)
+			const link = document.createElement('a')
+			link.download = 'anubis-avatar.' + format.value.toLowerCase()
+			link.href = dataUrl
+			link.click()
 		}
 		function share() {
 			const preset = getPresetObject()
 			const searchParams = new URLSearchParams(preset)
-			const url = new URL(location.href.split("?")[0] + searchParams.toString())
+			const url = new URL(location.href.split("?")[0] + "?" + searchParams.toString())
 			copy(url.toString())
 			copiedTooltip.value = "Link copied"
 		}
 		function onPresetChanged(preset: Preset | null) {
 			if (!preset) return;
-			bgcolor.value = preset.bgcolor;
-			body.value = preset.body;
-			bodyLights.value = preset.bodyLights;
-			primary.value = preset.primary;
-			secondary.value = preset.secondary;
+			bgcolor.value = preset.bgcolor
+			body.value = preset.body
+			bodyLights.value = preset.bodyLights
+			primary.value = preset.primary
+			secondary.value = preset.secondary
 		}
 		async function onClickImport() {
 			const [handle] = await window.showOpenFilePicker({
@@ -82,44 +105,46 @@ export default defineComponent({
 						description: "Anubis Preset",
 						accept: { 'application/*': ['.json'] }
 					}]
-			});
-			if (handle.kind !== "file") return;
-			const file = await handle.getFile();
-			const reader = new FileReader();
-			reader.readAsText(file);
+			})
+			if (handle.kind !== "file") return
+			const file = await handle.getFile()
+			const reader = new FileReader()
+			reader.readAsText(file)
 			reader.onload = function(){
-				const content = reader.result as string;
+				const content = reader.result as string
 				try {
-					const preset: Preset = JSON.parse(content);
-					bgcolor.value = preset.bgcolor;
-					body.value = preset.body;
-					bodyLights.value = preset.bodyLights;
-					primary.value = preset.primary;
-					secondary.value = preset.secondary;
+					const preset: Preset = JSON.parse(content)
+					bgcolor.value = preset.bgcolor
+					body.value = preset.body
+					bodyLights.value = preset.bodyLights
+					primary.value = preset.primary
+					secondary.value = preset.secondary
 				} catch {}
 			}
 		}
 		function onClickExport() {
 			const exportObj = getPresetObject()
-			const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, undefined, "  "));
-			const anchor = document.createElement('a');
-			anchor.setAttribute("href", dataStr);
-			anchor.setAttribute("download", "anubis-preset.json");
-			document.body.appendChild(anchor);
-			anchor.click();
-			anchor.remove();
+			const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, undefined, "  "))
+			const anchor = document.createElement('a')
+			anchor.setAttribute("href", dataStr)
+			anchor.setAttribute("download", "anubis-preset.json")
+			document.body.appendChild(anchor)
+			anchor.click()
+			anchor.remove()
 		}
 		function onClickRandomColors() {
 			const colors = new colorScheme()
 				.from_hue(Math.random() * 1000)
 				.scheme('contrast')
 				.variation('light')
-				.colors() as string[];
-			primary.value = "#" + colors.at(0);
-			secondary.value = "#" + colors.at(-1);
+				.colors() as string[]
+			primary.value = "#" + colors.at(0)
+			secondary.value = "#" + colors.at(-1)
 		}
-		onClickRandomColors();
+		onClickRandomColors()
 		return {
+			loading,
+			loadingDebounced,
 			onClickRandomColors,
 			repoUrl,
 			printArea,
