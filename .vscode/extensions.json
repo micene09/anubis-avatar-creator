@@ -1,0 +1,14 @@
+{
+	"recommendations": [
+		"streetsidesoftware.code-spell-checker",
+		"editorconfig.editorconfig",
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"syler.sass-indented",
+		"gruntfuggly.todo-tree",
+		"vue.volar",
+		"yzhang.markdown-all-in-one",
+		"bierner.markdown-preview-github-styles",
+		"bierner.markdown-emoji"
+	]
+}
